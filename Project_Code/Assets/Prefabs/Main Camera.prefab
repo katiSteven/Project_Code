@@ -41,7 +41,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 38.6, y: 45, z: 0}
 --- !u!20 &20184035730246490
 Camera:
   m_ObjectHideFlags: 1
@@ -62,7 +62,7 @@ Camera:
   far clip plane: 1000
   field of view: 17
   orthographic: 1
-  orthographic size: 11.5
+  orthographic size: 27.9
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

@@ -701,7 +701,7 @@ Prefab:
     - target: {fileID: 20184035730246490, guid: 529a0af3f37cbce47a503835cb4c6a39,
         type: 2}
       propertyPath: orthographic size
-      value: 12
+      value: 27.9
       objectReference: {fileID: 0}
     - target: {fileID: 20184035730246490, guid: 529a0af3f37cbce47a503835cb4c6a39,
         type: 2}
@@ -711,7 +711,7 @@ Prefab:
     - target: {fileID: 20184035730246490, guid: 529a0af3f37cbce47a503835cb4c6a39,
         type: 2}
       propertyPath: m_HDR
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 20184035730246490, guid: 529a0af3f37cbce47a503835cb4c6a39,
         type: 2}
