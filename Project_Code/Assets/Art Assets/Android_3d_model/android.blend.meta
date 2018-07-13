@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: 3264ab68f060fe844a8482cfd5b6c39b
+timeCreated: 1528372044
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: antenka_leva
+    100004: antenka_prava
+    100006: Armature
+    100008: Back
+    100010: hlava
+    100012: hlava_0
+    100014: noha_leva
+    100016: noha_leva_0
+    100018: noha_prava
+    100020: noha_prava_0
+    100022: oko_leva
+    100024: oko_prava
+    100026: ruka_leva
+    100028: ruka_leva_0
+    100030: ruka_prava
+    100032: ruka_prava_0
+    100034: telo
+    400000: //RootNode
+    400002: antenka_leva
+    400004: antenka_prava
+    400006: Armature
+    400008: Back
+    400010: hlava
+    400012: hlava_0
+    400014: noha_leva
+    400016: noha_leva_0
+    400018: noha_prava
+    400020: noha_prava_0
+    400022: oko_leva
+    400024: oko_prava
+    400026: ruka_leva
+    400028: ruka_leva_0
+    400030: ruka_prava
+    400032: ruka_prava_0
+    400034: telo
+    2300000: antenka_leva
+    2300002: antenka_prava
+    2300004: oko_leva
+    2300006: oko_prava
+    3300000: antenka_leva
+    3300002: antenka_prava
+    3300004: oko_leva
+    3300006: oko_prava
+    4300000: ruka_leva
+    4300002: ruka_prava
+    4300004: telo
+    4300006: hlava
+    4300008: antenka_prava
+    4300010: antenka_leva
+    4300012: oko_prava
+    4300014: oko_leva
+    4300016: noha_prava
+    4300018: noha_leva
+    7400000: Default Take
+    9500000: //RootNode
+    13700000: hlava
+    13700002: noha_leva
+    13700004: noha_prava
+    13700006: ruka_leva
+    13700008: ruka_prava
+    13700010: telo
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: android
+    second: {fileID: 2100000, guid: 11cbd4989952d374c934fcf4997f62ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oko
+    second: {fileID: 2100000, guid: f4da96e2f7bc6be4b9dca0f6a820e762, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
