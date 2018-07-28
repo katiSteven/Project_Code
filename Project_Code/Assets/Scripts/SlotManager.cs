@@ -1,6 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+
 
 public class SlotManager : MonoBehaviour {
 
@@ -11,8 +14,16 @@ public class SlotManager : MonoBehaviour {
 	private Compile compile;
 
 	private GameObject button;
-	private int currentChild = 0;
+	private GameObject InventorySlot;
+
+	Queue<string> instructionQueue = new Queue<string> ();
+	Queue<int> groupedNumberingQueue = new Queue<int> ();
+//	private int currentChild = 0;
 	private float delay;
+	private string previousInstruction;
+//	private int similarInstructionCounter = 1;
+	private int groupedInstructionCount = 0;
+//	private string textInside;
 
 
 	void Start(){
@@ -23,10 +34,21 @@ public class SlotManager : MonoBehaviour {
 
 	// Recieves instructions from buttons & add them to the editor
 	public void AddInstructions(string instruction){
-		GameObject InventorySlot = Instantiate (ObjectToInstantiate, transform) as GameObject;
-		Text TextComponent = InventorySlot.transform.GetChild (0).GetComponentInChildren<Text> ();
-		TextComponent.text = instruction;
+		if (instruction.Equals (previousInstruction)) {
+			Text textComponent = InventorySlot.transform.GetChild (0).GetComponentInChildren<Text> ();
+			string textInside = textComponent.text;
+			int previousNumCount = int.Parse( new string(textInside.Where(char.IsDigit).ToArray()));
 
+			textComponent.text = instruction + "(" + (++previousNumCount) + ")";
+		} else {
+			InventorySlot = Instantiate (ObjectToInstantiate, transform) as GameObject;
+			Text textComponent = InventorySlot.transform.GetChild (0).GetComponentInChildren<Text> ();
+			previousInstruction = instruction;
+//			similarInstructionCounter = 1;
+			textComponent.text = instruction + "(" + (1) + ")";
+		}
+
+		//below code generates the Line numbering in the instruction editor GameObject
 		slotCounter.GenerateNumbering (true);
 	}
 
@@ -34,35 +56,26 @@ public class SlotManager : MonoBehaviour {
 	public void ExecuteInstructions(float delay){
 		this.delay = delay;
 //		print (transform.childCount);
-		currentChild = 0;
+		//currentChild = 0;
+		GenerateSingleInstruction ();
 		InvokeRepeating ("SingleInstruction",1,delay);
 	}
 
 	// all new instructions have to be added here (inside the switch case) before testing/Executing to ensure desired working.
 	// responsible with reading the current instruction & communicating it with the Player script.
 	void SingleInstruction(){
-		if (currentChild < transform.childCount) {
-			button = transform.GetChild (currentChild).GetChild (0).gameObject;
-			StartCoroutine ("ColorSwitchDelay");
-			Text instruction = button.GetComponentInChildren<Text> ();
-			switch(instruction.text){
-			case "MoveForward()":
+		if (instructionQueue.Count > 0) {
+			string instruction = instructionQueue.Peek ();
+			instructionQueue.Dequeue ();
+			if (instruction.Equals ("MoveForward")) {
 				player.MoveForward ();
-				break;
-			case "TurnLeft()":
+			} else if (instruction.Equals ("TurnLeft")) {
 				player.TurnLeft ();
-				break;
-			case "TurnRight()":
+			} else if (instruction.Equals ("TurnRight")) {
 				player.TurnRight ();
-				break;
-			case "For() {  ":
-
-				break;
-			default:
-				Debug.LogError (gameObject.name + "instruction not available");
-				break;
+			} else {
+				Debug.LogError (instruction + " is not a valid instruction");
 			}
-			currentChild++;
 		} else {
 			StopExecution ();
 		}
@@ -70,7 +83,35 @@ public class SlotManager : MonoBehaviour {
 
 	public void StopExecution(){
 		CancelInvoke ("SingleInstruction");
+		instructionQueue.Clear ();
 		compile.EnableButton ();
+	}
+
+	void GenerateSingleInstruction(){
+		for(int i = 0; i < transform.childCount; i++){
+			button = transform.GetChild (i).GetChild (0).gameObject;
+			Text instruction = button.GetComponentInChildren<Text> ();
+
+			string textInside = instruction.text;
+			// to get the number value out of an instruction
+			groupedInstructionCount = int.Parse( new string(textInside.Where(char.IsDigit).ToArray()));
+
+			//grouped number inside every instruction line
+			groupedNumberingQueue.Enqueue (groupedInstructionCount);	//make use of this to color the currently executing statement
+
+			//the below for loop converts for eg: "Move(3)" to Move(), Move(), Move().
+			for (int j = 0; j < groupedInstructionCount; j++) {
+				if (textInside.Contains ("MoveForward")) {
+					instructionQueue.Enqueue ("MoveForward");
+				} else if (textInside.Contains ("TurnLeft")) {
+					instructionQueue.Enqueue ("TurnLeft");
+				} else if (textInside.Contains ("TurnRight")) {
+					instructionQueue.Enqueue ("TurnRight");
+				} else {
+					Debug.LogError (textInside + " is not a valid instruction");
+				}
+			}
+		}
 	}
 
 	// to indicate if the Instruction is currently in execution or not.
@@ -93,13 +134,19 @@ public class SlotManager : MonoBehaviour {
 	// removes all the instructions added in the editor
 	public void RemoveAllInstructions(){
 		foreach(InventorySlot i in transform.GetComponentsInChildren<InventorySlot>()){
-			i.RemoveSlot ();
+//			i.RemoveSlot ();
+			Destroy(i.gameObject);
+			slotCounter.GenerateNumbering (false);
+			previousInstruction = null;
 		}
 	}
 
 	// remove a single instruction slot passed as a parameter
 	public void RemoveInstruction(GameObject toDestroy){
+
+
 		Destroy (toDestroy.gameObject);
 		slotCounter.GenerateNumbering (false);
+		previousInstruction = null;
 	}
 }

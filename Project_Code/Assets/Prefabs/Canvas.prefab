@@ -1515,8 +1515,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   min: 300
   max: 1000
-  mid: 650
+  movementThreshold: 150
   animationTime: 500
+  openOnLoad: 1
 --- !u!114 &114500697806476038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1979,7 +1980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 2
+  - eventID: 13
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -1996,7 +1997,7 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 3
+  - eventID: 14
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -2650,7 +2651,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1377508439350652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 259.8, y: -406.04004, z: 0}
+  m_LocalPosition: {x: 259.8, y: -272.08008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224429761606761088}
@@ -2659,7 +2660,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 133.9599}
   m_SizeDelta: {x: 1080, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224701855601865912
@@ -2816,7 +2817,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1309319113364688}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 21.995, z: 0}
+  m_LocalPosition: {x: 0, y: 19.24501, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224936855731390114}
@@ -2825,7 +2826,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 21.995}
+  m_AnchoredPosition: {x: 0, y: 19.24501}
   m_SizeDelta: {x: 149.78485, y: 43.989685}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224959795861920332

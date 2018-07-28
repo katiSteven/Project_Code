@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
 
 // has functionalities which are unique to individual inventory slot
 public class InventorySlot : MonoBehaviour {
@@ -13,6 +15,22 @@ public class InventorySlot : MonoBehaviour {
 	
 	public void RemoveSlot(){
 		ui_Audio.PlayAudioFor ("clearButton");
-		slotManager.RemoveInstruction (gameObject);
+		Text textComponent = transform.GetChild (0).GetComponentInChildren<Text> ();
+		string textInside = textComponent.text;
+
+		int groupedInstructionCount = int.Parse( new string(textInside.Where(char.IsDigit).ToArray()));
+
+		if(groupedInstructionCount <= 1){
+			slotManager.RemoveInstruction (gameObject);
+		}
+
+		if (textInside.Contains ("MoveForward")) {
+			textComponent.text = "MoveForward" + "(" + (--groupedInstructionCount) + ")";
+		}else if(textInside.Contains ("TurnLeft")) {
+			textComponent.text = "TurnLeft" + "(" + (--groupedInstructionCount) + ")";
+		}else if(textInside.Contains ("TurnRight")){
+			textComponent.text = "TurnRight" + "(" + (--groupedInstructionCount) + ")";
+		}
+//		slotManager.RemoveInstruction (gameObject);
 	}
 }

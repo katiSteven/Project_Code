@@ -21,7 +21,7 @@ public class Compile : MonoBehaviour {
 	public void CompileInstructions(){
 		
 		player.SetToPosition (player.GetInitialPosition ());
-		player.SetToRotation(player.GetInitialRotation ());
+		player.SetToRotation (player.GetInitialRotation ());
 
 		scrollbar.value = 1f;	//go to the top of the editor i.e to the first instruction
 

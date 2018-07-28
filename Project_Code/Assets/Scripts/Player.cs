@@ -32,13 +32,13 @@ public class Player : MonoBehaviour {
 		playerAudio = GetComponent<PlayerAudio> ();
 	}
 		
-	void OnCollisionEnter(Collision col){
-
-		// making the green start platform as the initial position
-		if (col.gameObject.CompareTag ("StartPlatform")) {
-			SetInitialPosition (transform.position);
-		}
-	}
+//	void OnCollisionEnter(Collision col){
+//
+//		// making the green start platform as the initial position
+//		if (col.gameObject.CompareTag ("StartPlatform")) {
+//			SetInitialPosition (transform.position);
+//		}
+//	}
 
 	void SetInitialPosition (Vector3 position){
 		initPos = position;		//using this method will discard the previous initial position of the gameObject, use with caution

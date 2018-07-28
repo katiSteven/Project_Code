@@ -1295,6 +1295,16 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -643.89264
       objectReference: {fileID: 0}
+    - target: {fileID: 114541405743858164, guid: b75695b01e1b44a4094b91791d574085,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1581115302}
+    - target: {fileID: 114541405743858164, guid: b75695b01e1b44a4094b91791d574085,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: restartCurrentLevel
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b75695b01e1b44a4094b91791d574085, type: 2}
   m_IsPrefabParent: 0
