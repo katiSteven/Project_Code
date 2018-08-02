@@ -64,7 +64,7 @@ public class SlotManager : MonoBehaviour {
 	// all new instructions have to be added here (inside the switch case) before testing/Executing to ensure desired working.
 	// responsible with reading the current instruction & communicating it with the Player script.
 	void SingleInstruction(){
-		if (instructionQueue.Count > 0) {
+		if (instructionQueue.Count > 0 && player.OnGround()) {
 			string instruction = instructionQueue.Peek ();
 			instructionQueue.Dequeue ();
 			if (instruction.Equals ("MoveForward")) {
@@ -134,11 +134,10 @@ public class SlotManager : MonoBehaviour {
 	// removes all the instructions added in the editor
 	public void RemoveAllInstructions(){
 		foreach(InventorySlot i in transform.GetComponentsInChildren<InventorySlot>()){
-//			i.RemoveSlot ();
 			Destroy(i.gameObject);
-			slotCounter.GenerateNumbering (false);
-			previousInstruction = null;
 		}
+		previousInstruction = null;
+		slotCounter.GenerateNumbering (false);
 	}
 
 	// remove a single instruction slot passed as a parameter

@@ -21,9 +21,13 @@ public class SlotCounter : MonoBehaviour {
 		TextComponent.text = number.ToString ();
 	}
 
+	// rework this class, try & implement foreach loop to check the count of inventory slots
+	// rework number generation to check every frame in the Update function.
+
 	public void GenerateNumbering(bool isAddingInstructions){
 		
 		RemoveNumbering ();
+
 
 		if (isAddingInstructions) {
 			for (int i = 0; i < GetInstructionCount (true); i++) {

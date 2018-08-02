@@ -6,6 +6,7 @@ public class Compile : MonoBehaviour {
 	public float instructionDelay;
 
 	private SlotManager slotManager;
+	private SlotCounter slotCounter;
 	private Scrollbar scrollbar;
 	private Player player;
 	private Button button;
@@ -13,6 +14,7 @@ public class Compile : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		slotManager = GameObject.FindObjectOfType<SlotManager> ();
+		slotCounter = GameObject.FindObjectOfType<SlotCounter> ();
 		scrollbar = GameObject.FindObjectOfType<Scrollbar> ();
 		player = FindObjectOfType<Player> ();
 		button = GetComponent<Button> ();
@@ -39,5 +41,6 @@ public class Compile : MonoBehaviour {
 
 	public void RemoveInstructions(){
 		slotManager.RemoveAllInstructions ();
+//		slotCounter.GenerateNumbering (false);
 	}
 }

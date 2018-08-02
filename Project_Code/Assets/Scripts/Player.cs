@@ -9,12 +9,14 @@ public class Player : MonoBehaviour {
 	public LDIRECTION dir = LDIRECTION.FORWARD;
 
 	private PlayerAudio playerAudio;
+	private Collider collider1 = new Collider();
 
 	private bool canMove = true, moving = false;
 
 	private Vector3 pos;								//holds the next posiiton to move towards
 	private LDIRECTION initDir = LDIRECTION.FORWARD;	//stores initial direction
 	private Vector3 initPos;							//stores initial position
+	private bool isColliding = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -98,6 +100,23 @@ public class Player : MonoBehaviour {
 			}
 			transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed);
 		}
+	}
+
+	void OnCollisionStay(Collision col){
+		if (col.gameObject.GetComponent<MeshFilter> ()) {
+			isColliding = true;
+		}
+	}
+
+	void OnCollisionExit(){
+		isColliding = false;
+	}
+
+	public bool OnGround(){
+		if (isColliding)
+			return true;
+		else
+			return false;
 	}
 
 	public void MoveForward(){
