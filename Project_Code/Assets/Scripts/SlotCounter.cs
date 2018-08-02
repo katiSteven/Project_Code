@@ -18,13 +18,13 @@ public class SlotCounter : MonoBehaviour {
 	public void AddNumber(int number){
 		GameObject InventorySlot = Instantiate (ObjectToInstantiate, transform) as GameObject;
 		Text TextComponent = InventorySlot.GetComponentInChildren<Text> ();
-		TextComponent.text = number.ToString ();
-	}
+        TextComponent.text = number.ToString();
+    }
 
-	// rework this class, try & implement foreach loop to check the count of inventory slots
-	// rework number generation to check every frame in the Update function.
+    // rework this class, try & implement foreach loop to check the count of inventory slots
+    // rework number generation to check every frame in the Update function.
 
-	public void GenerateNumbering(bool isAddingInstructions){
+    public void GenerateNumbering(bool isAddingInstructions){
 		
 		RemoveNumbering ();
 
