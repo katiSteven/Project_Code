@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CameraManipulator.cs" />
     <Compile Include="Assets\Scripts\Compile.cs" />
     <Compile Include="Assets\Scripts\CubePlacer.cs" />
     <Compile Include="Assets\Scripts\GridMaker.cs" />

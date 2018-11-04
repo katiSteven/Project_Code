@@ -18,13 +18,11 @@ public class InventorySlot : MonoBehaviour {
 		Text textComponent = transform.GetChild (0).GetComponentInChildren<Text> ();
 		string textInside = textComponent.text;
 
-		int groupedInstructionCount = int.Parse( new string(textInside.Where(char.IsDigit).ToArray()));
+		int groupedInstructionCount = int.Parse(new string(textInside.Where(char.IsDigit).ToArray()));
 
 		if(groupedInstructionCount <= 1){
 			slotManager.RemoveInstruction (gameObject);
-		}
-
-		if (textInside.Contains ("MoveForward")) {
+		}else if (textInside.Contains ("MoveForward")) {
 			textComponent.text = "MoveForward" + "(" + (--groupedInstructionCount) + ")";
 		}else if(textInside.Contains ("TurnLeft")) {
 			textComponent.text = "TurnLeft" + "(" + (--groupedInstructionCount) + ")";

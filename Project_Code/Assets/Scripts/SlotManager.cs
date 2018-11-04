@@ -21,7 +21,6 @@ public class SlotManager : MonoBehaviour {
 	private string previousInstruction;
 	private int groupedInstructionCount = 0;
 
-
 	void Start(){
 		player = FindObjectOfType<Player> ().GetComponent<Player> ();
 		slotCounter = FindObjectOfType<SlotCounter> ().GetComponent<SlotCounter> ();
@@ -44,7 +43,7 @@ public class SlotManager : MonoBehaviour {
 		}
 
 		//below code generates the Line numbering in the instruction editor GameObject
-		slotCounter.GenerateNumbering (true);
+		slotCounter.GenerateNumbering ();
 	}
 
 	// executes all the available instructions in the editor sequentially with desired delay in between
@@ -57,21 +56,19 @@ public class SlotManager : MonoBehaviour {
 	// all new instructions have to be added here (inside the switch case) before testing/Executing to ensure desired working.
 	// responsible with reading the current instruction & communicating it with the Player script.
 	void SingleInstruction(){
-		if (instructionQueue.Count > 0 && player.OnGround()) {
-			string instruction = instructionQueue.Peek ();
-			instructionQueue.Dequeue ();
-			if (instruction.Equals ("MoveForward")) {
-				player.MoveForward ();
-			} else if (instruction.Equals ("TurnLeft")) {
-				player.TurnLeft ();
-			} else if (instruction.Equals ("TurnRight")) {
-				player.TurnRight ();
-			} else {
-				Debug.LogError (instruction + " is not a valid instruction");
-			}
-		} else {
-			StopExecution ();
-		}
+		if (instructionQueue.Count > 0) {
+            if (player.OnGround()) {
+                string instruction = instructionQueue.Peek();
+                instructionQueue.Dequeue();
+                if (instruction.Equals("MoveForward"))
+                { player.MoveForward(); }
+                else if (instruction.Equals("TurnLeft"))
+                { player.TurnLeft(); }
+                else if (instruction.Equals("TurnRight"))
+                { player.TurnRight(); }
+                else { Debug.LogError(instruction + " is not a valid instruction"); }
+            }
+		} else { StopExecution (); }
 	}
 
 	public void StopExecution(){
@@ -87,7 +84,7 @@ public class SlotManager : MonoBehaviour {
 
 			string textInside = instruction.text;
 			// to get the number value out of an instruction
-			groupedInstructionCount = int.Parse( new string(textInside.Where(char.IsDigit).ToArray()));
+			groupedInstructionCount = int.Parse(new string(textInside.Where(char.IsDigit).ToArray()));
 
 			//grouped number inside every instruction line
 			groupedNumberingQueue.Enqueue (groupedInstructionCount);	//make use of this to color the currently executing statement
@@ -110,11 +107,8 @@ public class SlotManager : MonoBehaviour {
 	// to indicate if the Instruction is currently in execution or not.
 	void SetExecutionColor(bool value){
 		Image toChangeColor = button.GetComponent<Image> ();
-		if(value){
-			toChangeColor.color = Color.red;
-		}else{
-			toChangeColor.color = Color.white;
-		}
+		if(value) { toChangeColor.color = Color.red; }
+        else { toChangeColor.color = Color.white; }
 	}
 
 	// cannot be >= "delay" seconds as object instance would get changed
@@ -135,8 +129,25 @@ public class SlotManager : MonoBehaviour {
 
 	// remove a single instruction slot passed as a parameter
 	public void RemoveInstruction(GameObject toDestroy){
-		Destroy (toDestroy.gameObject);
-		slotCounter.GenerateNumbering (false);
-		previousInstruction = null;
-	}
+		DestroyImmediate (toDestroy.gameObject);
+		slotCounter.GenerateNumbering ();
+        int childCount = transform.childCount;
+        if (childCount > 0)
+        {
+            GameObject aboveInventorySlot = transform.GetChild(childCount - 1).gameObject;
+            Text lastInstructionText = aboveInventorySlot.transform.GetChild(0).GetComponentInChildren<Text>();
+            string textInside = lastInstructionText.text;
+
+            InventorySlot = aboveInventorySlot;
+
+            if (textInside.Contains("MoveForward"))
+            { previousInstruction = "MoveForward"; }
+            else if (textInside.Contains("TurnLeft"))
+            { previousInstruction = "TurnLeft"; }
+            else if (textInside.Contains("TurnRight"))
+            { previousInstruction = "TurnRight"; }
+            else { Debug.LogError(textInside + " is not a valid instruction"); }
+        }
+        else { previousInstruction = null; }
+    }
 }

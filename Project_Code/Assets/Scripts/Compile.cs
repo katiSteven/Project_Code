@@ -6,15 +6,12 @@ public class Compile : MonoBehaviour {
 	public float instructionDelay;
 
 	private SlotManager slotManager;
-	private SlotCounter slotCounter;
 	private Scrollbar scrollbar;
 	private Player player;
 	private Button button;
 
-	// Use this for initialization
 	void Start () {
 		slotManager = FindObjectOfType<SlotManager> ();
-		slotCounter = FindObjectOfType<SlotCounter> ();
 		scrollbar = FindObjectOfType<Scrollbar> ();
 		player = FindObjectOfType<Player> ();
 		button = GetComponent<Button> ();

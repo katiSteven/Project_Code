@@ -1,18 +1,17 @@
 ﻿using UnityEngine;
 
-public enum LDIRECTION {FORWARD, BACKWARD, LEFT, RIGHT};
+public enum MDIRECTION {FORWARD, BACKWARD, LEFT, RIGHT};
 
 public class Player : MonoBehaviour {
 
 	public int speed = 10;
 	public float distanceToCover = 1f;
-	public LDIRECTION direction = LDIRECTION.FORWARD;
+	public MDIRECTION direction = MDIRECTION.FORWARD;
 
 	private PlayerAudio playerAudio;
-	private readonly Collider collider1 = new Collider();
 	private bool canMove = true, moving = false;
 	private Vector3 nextPosition;
-	private LDIRECTION initialDirection = LDIRECTION.FORWARD;
+	private MDIRECTION initialDirection = MDIRECTION.FORWARD;
 	private Vector3 initialPosition;
 	private bool isColliding = false;
 
@@ -34,7 +33,7 @@ public class Player : MonoBehaviour {
 		initialPosition = position;
 	}
 
-    void SetInitialRotation (LDIRECTION dir){
+    void SetInitialRotation (MDIRECTION dir){
 		initialDirection = dir;
 	}
 
@@ -43,22 +42,22 @@ public class Player : MonoBehaviour {
 		transform.position = position;
 	}
 
-    public void SetToRotation (LDIRECTION dir){
+    public void SetToRotation (MDIRECTION dir){
 		direction = dir;
 		transform.rotation = Quaternion.AngleAxis (0, Vector3.up);	//default rotation
 
 		//to assign an initial direction to the character, use this  instead of transform->Rotation
 		switch(dir){
-		case LDIRECTION.FORWARD:
+		case MDIRECTION.FORWARD:
 			transform.rotation *= Quaternion.AngleAxis (0, Vector3.up);
 			break;
-		case LDIRECTION.LEFT:
+		case MDIRECTION.LEFT:
 			transform.rotation *= Quaternion.AngleAxis (-90f, Vector3.up);
 			break;
-		case LDIRECTION.BACKWARD:
+		case MDIRECTION.BACKWARD:
 			transform.rotation *= Quaternion.AngleAxis (180f, Vector3.up);
 			break;
-		case LDIRECTION.RIGHT:
+		case MDIRECTION.RIGHT:
 			transform.rotation *= Quaternion.AngleAxis (90f, Vector3.up);
 			break;
 		}
@@ -66,7 +65,7 @@ public class Player : MonoBehaviour {
 
 	public Vector3 GetInitialPosition (){ return initialPosition; }
 
-	public LDIRECTION GetInitialRotation (){ return initialDirection; }
+	public MDIRECTION GetInitialRotation (){ return initialDirection; }
 
 	void Update () {
 
@@ -104,16 +103,16 @@ public class Player : MonoBehaviour {
 
         //moves according to the 
 		switch(direction){
-		case LDIRECTION.FORWARD:
+		case MDIRECTION.FORWARD:
 			nextPosition += Vector3.forward * distanceToCover;
 			break;
-		case LDIRECTION.LEFT:
+		case MDIRECTION.LEFT:
 			nextPosition += Vector3.left * distanceToCover;
 			break;
-		case LDIRECTION.BACKWARD:
+		case MDIRECTION.BACKWARD:
 			nextPosition += Vector3.back * distanceToCover;
 			break;
-		case LDIRECTION.RIGHT:
+		case MDIRECTION.RIGHT:
 			nextPosition += Vector3.right * distanceToCover;
 			break;
 		}
@@ -130,17 +129,17 @@ public class Player : MonoBehaviour {
 
         //changes the enum direction for the upcoming instructions
         switch (direction){
-		case LDIRECTION.FORWARD:
-			direction = LDIRECTION.LEFT;
+		case MDIRECTION.FORWARD:
+			direction = MDIRECTION.LEFT;
 			break;
-		case LDIRECTION.LEFT:
-			direction = LDIRECTION.BACKWARD;
+		case MDIRECTION.LEFT:
+			direction = MDIRECTION.BACKWARD;
 			break;
-		case LDIRECTION.BACKWARD:
-			direction = LDIRECTION.RIGHT;
+		case MDIRECTION.BACKWARD:
+			direction = MDIRECTION.RIGHT;
 			break;
-		case LDIRECTION.RIGHT:
-			direction = LDIRECTION.FORWARD;
+		case MDIRECTION.RIGHT:
+			direction = MDIRECTION.FORWARD;
 			break;
 		}
 	}
@@ -154,17 +153,17 @@ public class Player : MonoBehaviour {
         transform.rotation *= Quaternion.AngleAxis(90f, Vector3.up);	//this rotation is purely for visual representation
 
 		switch(direction){
-		case LDIRECTION.FORWARD:
-			direction = LDIRECTION.RIGHT;
+		case MDIRECTION.FORWARD:
+			direction = MDIRECTION.RIGHT;
 			break;
-		case LDIRECTION.LEFT:
-			direction = LDIRECTION.FORWARD;
+		case MDIRECTION.LEFT:
+			direction = MDIRECTION.FORWARD;
 			break;
-		case LDIRECTION.BACKWARD:
-			direction = LDIRECTION.LEFT;
+		case MDIRECTION.BACKWARD:
+			direction = MDIRECTION.LEFT;
 			break;
-		case LDIRECTION.RIGHT:
-			direction = LDIRECTION.BACKWARD;
+		case MDIRECTION.RIGHT:
+			direction = MDIRECTION.BACKWARD;
 			break;
 		}
 	}

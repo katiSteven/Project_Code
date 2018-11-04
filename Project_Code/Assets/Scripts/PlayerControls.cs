@@ -7,7 +7,7 @@ public class PlayerControls : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		slotManager = GameObject.FindObjectOfType<SlotManager> ();
+		slotManager = FindObjectOfType<SlotManager> ();
 	}
 
 	public void MoveForward(){
