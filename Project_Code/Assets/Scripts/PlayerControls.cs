@@ -11,9 +11,8 @@ public class PlayerControls : MonoBehaviour {
 	}
 
 	public void MoveForward(){
-		slotManager.AddInstructions ("MoveForward");	//function paranthesis will be provided by
-														// the SlotManager function
-	}
+		slotManager.AddInstructions ("MoveForward");    //function paranthesis will be provided by the SlotManager function
+    }
 
 	public void MoveLeft(){
 		slotManager.AddInstructions ("TurnLeft");
@@ -23,12 +22,3 @@ public class PlayerControls : MonoBehaviour {
 		slotManager.AddInstructions ("TurnRight");
 	}
 }
-
-// groupedInstructionCount = int.Parse( new string(textInside.Where(char.IsDigit).ToArray()));
-
-//button = transform.GetChild (currentChild).GetChild (0).gameObject;
-//Text instruction = button.GetComponentInChildren<Text> ();
-//StartCoroutine ("ColorSwitchDelay");
-
-//after evecuting an instruction
-//currentChild++;

@@ -15,14 +15,12 @@ public class GridMovement : MonoBehaviour {
 
 		if (canMove) {
 			pos = transform.position;
-//			Move ();
 		}
 
 		if(moving){
 			if(transform.position == pos){
 				moving = false;
 				canMove = true;
-//				Move ();
 			}
 			transform.position = Vector3.MoveTowards (transform.position, pos, Time.deltaTime * speed);
 		}

@@ -13,9 +13,9 @@ public class Compile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		slotManager = GameObject.FindObjectOfType<SlotManager> ();
-		slotCounter = GameObject.FindObjectOfType<SlotCounter> ();
-		scrollbar = GameObject.FindObjectOfType<Scrollbar> ();
+		slotManager = FindObjectOfType<SlotManager> ();
+		slotCounter = FindObjectOfType<SlotCounter> ();
+		scrollbar = FindObjectOfType<Scrollbar> ();
 		player = FindObjectOfType<Player> ();
 		button = GetComponent<Button> ();
 	}
@@ -41,6 +41,5 @@ public class Compile : MonoBehaviour {
 
 	public void RemoveInstructions(){
 		slotManager.RemoveAllInstructions ();
-//		slotCounter.GenerateNumbering (false);
 	}
 }

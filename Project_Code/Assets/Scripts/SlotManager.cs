@@ -9,21 +9,17 @@ public class SlotManager : MonoBehaviour {
 
 	public GameObject ObjectToInstantiate;
 
-	private Player player;
+    Queue<string> instructionQueue = new Queue<string>();
+    Queue<int> groupedNumberingQueue = new Queue<int>();
+
+    private Player player;
 	private SlotCounter slotCounter;
 	private Compile compile;
-
 	private GameObject button;
 	private GameObject InventorySlot;
-
-	Queue<string> instructionQueue = new Queue<string> ();
-	Queue<int> groupedNumberingQueue = new Queue<int> ();
-//	private int currentChild = 0;
 	private float delay;
 	private string previousInstruction;
-//	private int similarInstructionCounter = 1;
 	private int groupedInstructionCount = 0;
-//	private string textInside;
 
 
 	void Start(){
@@ -44,7 +40,6 @@ public class SlotManager : MonoBehaviour {
 			InventorySlot = Instantiate (ObjectToInstantiate, transform) as GameObject;
 			Text textComponent = InventorySlot.transform.GetChild (0).GetComponentInChildren<Text> ();
 			previousInstruction = instruction;
-//			similarInstructionCounter = 1;
 			textComponent.text = instruction + "(" + (1) + ")";
 		}
 
@@ -55,8 +50,6 @@ public class SlotManager : MonoBehaviour {
 	// executes all the available instructions in the editor sequentially with desired delay in between
 	public void ExecuteInstructions(float delay){
 		this.delay = delay;
-//		print (transform.childCount);
-		//currentChild = 0;
 		GenerateSingleInstruction ();
 		InvokeRepeating ("SingleInstruction",1,delay);
 	}
@@ -133,17 +126,15 @@ public class SlotManager : MonoBehaviour {
 
 	// removes all the instructions added in the editor
 	public void RemoveAllInstructions(){
-		foreach(InventorySlot i in transform.GetComponentsInChildren<InventorySlot>()){
+		foreach(InventorySlot i in GetComponentsInChildren<InventorySlot>()){
 			Destroy(i.gameObject);
-		}
-		previousInstruction = null;
-		slotCounter.GenerateNumbering (false);
-	}
+        }
+        slotCounter.RemoveNumbering();
+        previousInstruction = null;
+    }
 
 	// remove a single instruction slot passed as a parameter
 	public void RemoveInstruction(GameObject toDestroy){
-
-
 		Destroy (toDestroy.gameObject);
 		slotCounter.GenerateNumbering (false);
 		previousInstruction = null;

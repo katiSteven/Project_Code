@@ -4,16 +4,13 @@ using UnityEngine;
 public class KillZone : MonoBehaviour {
 
 	private SlotManager slotManager;
-
 	private Player player;
 	private Material material;
 
 	// Use this for initialization
 	void Start () {
 		slotManager = FindObjectOfType<SlotManager> ();
-
 		player = FindObjectOfType<Player> ();
-
 		material = GetComponent<Renderer> ().material;
 		material.color = Color.white;
 	}

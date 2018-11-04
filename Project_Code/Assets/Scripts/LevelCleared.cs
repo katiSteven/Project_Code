@@ -7,7 +7,6 @@ public class LevelCleared : MonoBehaviour {
 
 	private LevelManager levelManager;
 
-	// Use this for initialization
 	void Start () {
 		levelManager = FindObjectOfType<LevelManager> ().GetComponent<LevelManager> ();
 	}

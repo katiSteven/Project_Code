@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Linq;
 
-// has functionalities which are unique to individual inventory slot
+// has functionalities & text which are unique to individual inventory slot
 public class InventorySlot : MonoBehaviour {
 
 	private SlotManager slotManager;
@@ -31,6 +31,5 @@ public class InventorySlot : MonoBehaviour {
 		}else if(textInside.Contains ("TurnRight")){
 			textComponent.text = "TurnRight" + "(" + (--groupedInstructionCount) + ")";
 		}
-//		slotManager.RemoveInstruction (gameObject);
 	}
 }

@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class SliderButton : MonoBehaviour {
 
@@ -18,7 +16,6 @@ public class SliderButton : MonoBehaviour {
 		} else {
 			yMov = min;
 		}
-
 	}
 	
 	// Update is called once per frame
@@ -26,7 +23,6 @@ public class SliderButton : MonoBehaviour {
 		if (buttonPressed) {
 			yMov = Input.mousePosition.y;
 			transform.position = new Vector3 (transform.position.x, Mathf.Clamp (yMov, min, max), 0);
-
 		} else {
 			transform.position = Vector3.MoveTowards (transform.position, new Vector3 (transform.position.x,yMov, 0), Time.deltaTime * animationTime);
 		}
