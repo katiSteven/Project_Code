@@ -17,11 +17,14 @@ public class SlotManager : MonoBehaviour {
 	private Compile compile;
 	private GameObject button;
 	private GameObject InventorySlot;
-	private float delay;
+    private Image toChangeColor = null;
+    private Color color = Color.yellow;
 	private string previousInstruction;
 	private int groupedInstructionCount = 0;
+    private int singleInstructionsCount = 0;
+    private int groupedInstructionsCompleted = 0;
 
-	void Start(){
+    void Start(){
 		player = FindObjectOfType<Player> ().GetComponent<Player> ();
 		slotCounter = FindObjectOfType<SlotCounter> ().GetComponent<SlotCounter> ();
 		compile = FindObjectOfType<Compile> ().GetComponent<Compile> ();
@@ -48,18 +51,34 @@ public class SlotManager : MonoBehaviour {
 
 	// executes all the available instructions in the editor sequentially with desired delay in between
 	public void ExecuteInstructions(float delay){
-		this.delay = delay;
 		GenerateSingleInstruction ();
-		InvokeRepeating ("SingleInstruction",1,delay);
+        if (toChangeColor != null)
+        {
+            color = Color.white;
+            color.a = 0f;
+            toChangeColor.color = color;
+        }
+        InvokeRepeating ("SingleInstruction",1,delay);
 	}
 
-	// all new instructions have to be added here (inside the switch case) before testing/Executing to ensure desired working.
-	// responsible with reading the current instruction & communicating it with the Player script.
-	void SingleInstruction(){
+    // all new instructions have to be added here (inside the switch case) before testing/Executing to ensure desired working.
+    // responsible with reading the current instruction & communicating it with the Player script.
+
+    
+    void SingleInstruction(){
 		if (instructionQueue.Count > 0) {
             if (player.OnGround()) {
                 string instruction = instructionQueue.Peek();
                 instructionQueue.Dequeue();
+
+                ++singleInstructionsCount;
+                if (singleInstructionsCount == groupedNumberingQueue.Peek())
+                {
+                    groupedNumberingQueue.Dequeue();
+                    ++groupedInstructionsCompleted;
+                    singleInstructionsCount = 0;
+                }
+
                 if (instruction.Equals("MoveForward"))
                 { player.MoveForward(); }
                 else if (instruction.Equals("TurnLeft"))
@@ -73,7 +92,8 @@ public class SlotManager : MonoBehaviour {
 
 	public void StopExecution(){
 		CancelInvoke ("SingleInstruction");
-		instructionQueue.Clear ();
+        SetExecutionColor();
+        instructionQueue.Clear ();
 		compile.EnableButton ();
 	}
 
@@ -88,9 +108,10 @@ public class SlotManager : MonoBehaviour {
 
 			//grouped number inside every instruction line
 			groupedNumberingQueue.Enqueue (groupedInstructionCount);	//make use of this to color the currently executing statement
-
-			//the below for loop converts for eg: "Move(3)" to Move(), Move(), Move().
-			for (int j = 0; j < groupedInstructionCount; j++) {
+            //Debug.Log(groupedNumberingQueue.Peek());
+            //groupedNumberingQueue.Dequeue();
+            //the below for loop converts for eg: "Move(3)" to Move(), Move(), Move().
+            for (int j = 0; j < groupedInstructionCount; j++) {
 				if (textInside.Contains ("MoveForward")) {
 					instructionQueue.Enqueue ("MoveForward");
 				} else if (textInside.Contains ("TurnLeft")) {
@@ -104,22 +125,21 @@ public class SlotManager : MonoBehaviour {
 		}
 	}
 
-	// to indicate if the Instruction is currently in execution or not.
-	void SetExecutionColor(bool value){
-		Image toChangeColor = button.GetComponent<Image> ();
-		if(value) { toChangeColor.color = Color.red; }
-        else { toChangeColor.color = Color.white; }
-	}
+    // to indicate if the Instruction is currently in execution or not.
+    void SetExecutionColor()
+    {
+        button = transform.GetChild(groupedInstructionsCompleted-1).GetChild(0).gameObject;
+        toChangeColor = button.GetComponent<Image>();
+        color = Color.yellow;
+        color.a = 1f;
+        toChangeColor.color = color;
+        // re-initializing below variables for next run
+        singleInstructionsCount = 0;
+        groupedInstructionsCompleted = 0;
+    }
 
-	// cannot be >= "delay" seconds as object instance would get changed
-	IEnumerator ColorSwitchDelay(){
-		SetExecutionColor (true);
-		yield return new WaitForSeconds (delay - 0.5f);
-		SetExecutionColor (false);
-	}
-
-	// removes all the instructions added in the editor
-	public void RemoveAllInstructions(){
+    // removes all the instructions added in the editor
+    public void RemoveAllInstructions(){
 		foreach(InventorySlot i in GetComponentsInChildren<InventorySlot>()){
 			Destroy(i.gameObject);
         }

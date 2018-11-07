@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
 		SetInitialRotation (direction);
 
 		//current
-		SetToPosition (transform.position);
+		//SetToPosition (transform.position);   //dont enable causing the jumping issue
 		SetToRotation (direction);
 	}
 
@@ -69,9 +69,9 @@ public class Player : MonoBehaviour {
 
 	void Update () {
 
-		if (canMove) { nextPosition = transform.position; }
+        if (canMove) { nextPosition = transform.position; }
 
-		if(moving){
+        if (moving){
 			if(transform.position == nextPosition){
 				moving = false;
 				canMove = true;
@@ -91,8 +91,7 @@ public class Player : MonoBehaviour {
 	public bool OnGround(){
 		if (isColliding)
 			return true;
-		else
-			return false;
+        return false;
 	}
 
 	public void MoveForward(){

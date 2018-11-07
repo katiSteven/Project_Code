@@ -17,8 +17,8 @@ public class KillZone : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		if(col.gameObject.GetComponent<Player>()){
-			player.SetToPosition(player.GetInitialPosition () + new Vector3(0,3f,0));
-			player.SetToRotation(player.GetInitialRotation ());
+			player.SetToPosition(player.GetInitialPosition ()); // + new Vector3(0,3f,0)
+            player.SetToRotation(player.GetInitialRotation ());
 			StartCoroutine ("KillZoneColorDelay");
 			slotManager.StopExecution ();
 		}
