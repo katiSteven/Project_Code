@@ -17,8 +17,7 @@ public class Player : MonoBehaviour {
 
 	void Awake () {
 		//initial
-		SetInitialPosition (transform.position);
-		SetInitialRotation (direction);
+		
 
 		//current
 		//SetToPosition (transform.position);   //dont enable causing the jumping issue
@@ -26,7 +25,9 @@ public class Player : MonoBehaviour {
 	}
 
 	void Start () {
-		playerAudio = GetComponent<PlayerAudio> ();
+        SetInitialPosition(transform.position);
+        SetInitialRotation(direction);
+        playerAudio = GetComponent<PlayerAudio> ();
 	}
 
     void SetInitialPosition (Vector3 position){

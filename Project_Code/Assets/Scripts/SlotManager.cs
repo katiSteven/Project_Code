@@ -15,8 +15,9 @@ public class SlotManager : MonoBehaviour {
     private Player player;
 	private SlotCounter slotCounter;
 	private Compile compile;
-	private GameObject button;
-	private GameObject InventorySlot;
+	private GameObject Slot;
+    private Button removeButtonInSlots;
+    private GameObject InventorySlot;
     private Image toChangeColor = null;
     private Color color = Color.yellow;
 	private string previousInstruction;
@@ -94,13 +95,13 @@ public class SlotManager : MonoBehaviour {
 		CancelInvoke ("SingleInstruction");
         SetExecutionColor();
         instructionQueue.Clear ();
-		compile.EnableButton ();
+		compile.EnableButtons ();
 	}
 
 	void GenerateSingleInstruction(){
 		for(int i = 0; i < transform.childCount; i++){
-			button = transform.GetChild (i).GetChild (0).gameObject;
-			Text instruction = button.GetComponentInChildren<Text> ();
+			Slot = transform.GetChild (i).GetChild (0).gameObject;
+			Text instruction = Slot.GetComponentInChildren<Text> ();
 
 			string textInside = instruction.text;
 			// to get the number value out of an instruction
@@ -108,8 +109,6 @@ public class SlotManager : MonoBehaviour {
 
 			//grouped number inside every instruction line
 			groupedNumberingQueue.Enqueue (groupedInstructionCount);	//make use of this to color the currently executing statement
-            //Debug.Log(groupedNumberingQueue.Peek());
-            //groupedNumberingQueue.Dequeue();
             //the below for loop converts for eg: "Move(3)" to Move(), Move(), Move().
             for (int j = 0; j < groupedInstructionCount; j++) {
 				if (textInside.Contains ("MoveForward")) {
@@ -122,17 +121,28 @@ public class SlotManager : MonoBehaviour {
 					Debug.LogError (textInside + " is not a valid instruction");
 				}
 			}
-		}
-	}
+
+            //(below code) disabling the remove buttons in every inventory slot
+
+            removeButtonInSlots = transform.GetChild(i).GetChild(1).GetComponent<Button>();
+            removeButtonInSlots.interactable = false;
+        }
+    }
 
     // to indicate if the Instruction is currently in execution or not.
     void SetExecutionColor()
     {
-        button = transform.GetChild(groupedInstructionsCompleted-1).GetChild(0).gameObject;
-        toChangeColor = button.GetComponent<Image>();
-        color = Color.yellow;
-        color.a = 1f;
-        toChangeColor.color = color;
+        if (groupedInstructionsCompleted > 0)
+        {
+            Slot = transform.GetChild(groupedInstructionsCompleted - 1).GetChild(0).gameObject;
+            toChangeColor = Slot.GetComponent<Image>();
+            color = Color.yellow;
+            color.a = 1f;
+            toChangeColor.color = color;
+        }
+        //else { button = transform.GetChild(groupedInstructionsCompleted).GetChild(0).gameObject; }
+
+        
         // re-initializing below variables for next run
         singleInstructionsCount = 0;
         groupedInstructionsCompleted = 0;

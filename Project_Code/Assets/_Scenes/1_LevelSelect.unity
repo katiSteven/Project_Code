@@ -830,7 +830,7 @@ Prefab:
     - target: {fileID: 224915931708180494, guid: 15afccb5c8f175d40b03a0bd57aa75b8,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000037579173
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224915931708180494, guid: 15afccb5c8f175d40b03a0bd57aa75b8,
         type: 2}
@@ -969,7 +969,7 @@ Prefab:
     - target: {fileID: 114946669057732312, guid: 2768fea1011951f4f9fa9398e6ba4511,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: 2_Game02
+      value: 2_Game_02
       objectReference: {fileID: 0}
     - target: {fileID: 114946669057732312, guid: 2768fea1011951f4f9fa9398e6ba4511,
         type: 2}
@@ -1338,6 +1338,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 2025039251}
+    - target: {fileID: 114946669057732312, guid: 2768fea1011951f4f9fa9398e6ba4511,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 2_Game_01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2768fea1011951f4f9fa9398e6ba4511, type: 2}
   m_IsPrefabAsset: 0
