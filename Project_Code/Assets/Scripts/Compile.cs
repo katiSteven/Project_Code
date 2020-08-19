@@ -21,6 +21,7 @@ public class Compile : MonoBehaviour {
 		Playbutton = GetComponent<Button> ();
 	}
 
+    //This method gets called when the Plat Button is pressed
 	public void CompileInstructions(){
 		
 		player.SetToPosition (player.GetInitialPosition ());
@@ -32,6 +33,7 @@ public class Compile : MonoBehaviour {
 		slotManager.ExecuteInstructions (instructionDelay);	//execute all instructions with visual delay after every instruction
 	}
 
+    //enable buttons after excution
 	public void EnableButtons(){
 		Playbutton.interactable = true;
         Forwardbutton.interactable = true;
@@ -45,6 +47,7 @@ public class Compile : MonoBehaviour {
         }
     }
 
+    //disable buttons while execution
 	void DisableButtons(){
 		Playbutton.interactable = false;
         Forwardbutton.interactable = false;
@@ -53,6 +56,7 @@ public class Compile : MonoBehaviour {
         RemoveAllInstructionsbutton.interactable = false;
     }
 
+    //big cross button -> removes all instructions
 	public void RemoveInstructions(){
 		slotManager.RemoveAllInstructions ();
 	}

@@ -77,6 +77,7 @@ public class GridMovement : MonoBehaviour {
 			}
 		}
 	}
+
 //	private void Move(){
 //		if(buttonCoolDown <= 0){
 //			if(Input.GetKeyDown(KeyCode.UpArrow)){

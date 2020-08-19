@@ -6,7 +6,7 @@ public class UI_Audio : MonoBehaviour {
 	public AudioClip[] playerControls;
 
 	private AudioSource audioSource;
-	// Use this for initialization
+
 	void Awake () {
 		audioSource = GetComponent<AudioSource> ();
 	}

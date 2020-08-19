@@ -31,7 +31,7 @@ public class SlotManager : MonoBehaviour {
 		compile = FindObjectOfType<Compile> ().GetComponent<Compile> ();
 	}
 
-	// Recieves instructions from buttons & add them to the editor
+	// Recieves instructions from buttons appends parameter in suffix & adds them to the editor
 	public void AddInstructions(string instruction){
 		if (instruction.Equals (previousInstruction)) {
 			Text textComponent = InventorySlot.transform.GetChild (0).GetComponentInChildren<Text> ();
@@ -64,8 +64,6 @@ public class SlotManager : MonoBehaviour {
 
     // all new instructions have to be added here (inside the switch case) before testing/Executing to ensure desired working.
     // responsible with reading the current instruction & communicating it with the Player script.
-
-    
     void SingleInstruction(){
 		if (instructionQueue.Count > 0) {
             if (player.OnGround()) {
@@ -86,6 +84,7 @@ public class SlotManager : MonoBehaviour {
                 { player.TurnLeft(); }
                 else if (instruction.Equals("TurnRight"))
                 { player.TurnRight(); }
+                //else if () { }
                 else { Debug.LogError(instruction + " is not a valid instruction"); }
             }
 		} else { StopExecution (); }
@@ -111,15 +110,17 @@ public class SlotManager : MonoBehaviour {
 			groupedNumberingQueue.Enqueue (groupedInstructionCount);	//make use of this to color the currently executing statement
             //the below for loop converts for eg: "Move(3)" to Move(), Move(), Move().
             for (int j = 0; j < groupedInstructionCount; j++) {
-				if (textInside.Contains ("MoveForward")) {
-					instructionQueue.Enqueue ("MoveForward");
-				} else if (textInside.Contains ("TurnLeft")) {
-					instructionQueue.Enqueue ("TurnLeft");
-				} else if (textInside.Contains ("TurnRight")) {
-					instructionQueue.Enqueue ("TurnRight");
-				} else {
-					Debug.LogError (textInside + " is not a valid instruction");
-				}
+                if (textInside.Contains("MoveForward")) {
+                    instructionQueue.Enqueue("MoveForward");
+                } else if (textInside.Contains("TurnLeft")) {
+                    instructionQueue.Enqueue("TurnLeft");
+                } else if (textInside.Contains("TurnRight")) {
+                    instructionQueue.Enqueue("TurnRight");
+                }
+                //else if () { }
+                else {
+                    Debug.LogError(textInside + " is not a valid instruction");
+                }
 			}
 
             //(below code) disabling the remove buttons in every inventory slot
@@ -132,20 +133,28 @@ public class SlotManager : MonoBehaviour {
     // to indicate if the Instruction is currently in execution or not.
     void SetExecutionColor()
     {
-        if (groupedInstructionsCompleted > 0)
+        try
         {
-            Slot = transform.GetChild(groupedInstructionsCompleted - 1).GetChild(0).gameObject;
-            toChangeColor = Slot.GetComponent<Image>();
-            color = Color.yellow;
-            color.a = 1f;
-            toChangeColor.color = color;
-        }
-        //else { button = transform.GetChild(groupedInstructionsCompleted).GetChild(0).gameObject; }
+            if (groupedInstructionsCompleted > 0)
+            {
+                Slot = transform.GetChild(groupedInstructionsCompleted - 1).GetChild(0).gameObject;
+                toChangeColor = Slot.GetComponent<Image>();
+                color = Color.yellow;
+                color.a = 1f;
+                toChangeColor.color = color;
+            }
+            //else { button = transform.GetChild(groupedInstructionsCompleted).GetChild(0).gameObject; }
 
+
+            // re-initializing below variables for next run
+            singleInstructionsCount = 0;
+            groupedInstructionsCompleted = 0;
+        }
+        catch (System.Exception) {
+            //TODO: can use Log4Net here, to log exceptions here.
+            SetExecutionColor();
+        }
         
-        // re-initializing below variables for next run
-        singleInstructionsCount = 0;
-        groupedInstructionsCompleted = 0;
     }
 
     // removes all the instructions added in the editor

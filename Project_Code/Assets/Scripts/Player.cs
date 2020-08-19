@@ -20,7 +20,7 @@ public class Player : MonoBehaviour {
 		
 
 		//current
-		//SetToPosition (transform.position);   //dont enable causing the jumping issue
+		//SetToPosition (transform.position);   //dont enable, it's causing the jumping issue
 		SetToRotation (direction);
 	}
 
@@ -87,7 +87,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionExit(){ isColliding = false; }
+	void OnCollisionExit() { isColliding = false; }
 
 	public bool OnGround(){
 		if (isColliding)
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour {
 		canMove = false;
 		moving = true;
 
-        //moves according to the 
+        //moves forward according to the direction facing
 		switch(direction){
 		case MDIRECTION.FORWARD:
 			nextPosition += Vector3.forward * distanceToCover;

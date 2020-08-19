@@ -37,6 +37,7 @@ public class SliderButton : MonoBehaviour {
 		buttonPressed = false;
 		dragEnd = Input.mousePosition.y;
 
+        // the below part of the script is to give a organic feel to the sliding motion (particularly the incomplete slide motion)
 		float dragDistance = dragStart - dragEnd;
 		print (dragDistance);
 
